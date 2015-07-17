@@ -1,0 +1,31 @@
+{
+  "name": "angular-katex",
+  "version": "0.1.0",
+  "description": "Use KaTex with AngularJS",
+  "main": "./angular-katex",
+  "scripts": {
+    "test": "karma start karma.conf.js --single-run",
+    "min": "uglifyjs angular-katex.js --comments '/^!/' --compress --mangle -o angular-katex.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tfoxy/angular-katex"
+  },
+  "bugs": {
+    "url": "https://github.com/tfoxy/angular-katex/issues"
+  },
+  "keywords": [
+    "angular",
+    "katex",
+    "latex",
+    "tex"
+  ],
+  "devDependencies": {
+    "karma": "0.12.x",
+    "karma-mocha": "0.2.x",
+    "karma-chai": "0.1.x",
+    "karma-phantomjs-launcher": "0.2.x"
+  },
+  "author": "Tomás Fox <tomas.c.fox@gmail.com>",
+  "license": "MIT"
+}

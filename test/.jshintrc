@@ -1,0 +1,10 @@
+{
+  "extends": "../.jshintrc",
+
+  "globals": {
+    "inject": true,
+    "expect": true
+  },
+
+  "mocha": true
+}

@@ -1,0 +1,17 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 2,
+  "maxdepth": 5,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+
+  "node": true,
+
+  "globals": {
+    "angular": true
+  }
+}
