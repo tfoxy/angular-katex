@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>angular-katex example</title>
+  <link rel="stylesheet" href="bower_components/katex/dist/katex.min.css">
+  <style>
+    body {
+      font-size: 0.8em;
+    }
+    h3 {
+      margin-bottom: 0.5em;
+    }
+    code {
+      font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+      background-color: #eee;
+    }
+    pre {
+      padding: 5px;
+      margin-top: 0;
+      background-color: #eee;
+      display: inline-block;
+    }
+    pre code {
+      padding: 0;
+    }
+    .katex-error {
+      color: red
+    }
+  </style>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/katex/dist/katex.min.js"></script>
+  <script src="angular-katex.js"></script>
+  <script>
+    angular.module('app', ['katex']);
+  </script>
+</head>
+<body ng-app="app">
+<div>
+  <h3>Tag element</h3>
+  <pre><code>&lt;katex>x^2&lt;/katex></code></pre>
+  <div>
+    <katex>x^2</katex>
+  </div>
+</div>
+
+<div>
+  <h3>Attribute</h3>
+  <pre><code>&lt;div katex>x^2&lt;/div></code></pre>
+  <div katex>x^2</div>
+</div>
+
+<div>
+  <h3>Bind to scope</h3>
+  <pre><code>&lt;textarea ng-init="tex = 'x^2'" ng-model="tex" title="Latex equation">&lt;/textarea>
+&lt;div katex="tex">&lt;/div></code></pre>
+  <div>
+    <textarea ng-init="tex = 'x^2'" ng-model="tex" title="Latex equation"></textarea>
+    <div katex="tex"></div>
+  </div>
+</div>
+</body>
+</html>
