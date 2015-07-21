@@ -44,10 +44,10 @@ angular.module('myApp', ['katex', ...])
 <!-- Attribute -->
 <div katex>x^2</div>
 
-<!-- Watch scope property
+<!-- Bind to scope property
   $scope.tex = {pow: 'x^2'}
   -->
-<div katex="tex.pow"></div>
+<div katex-bind="tex.pow"></div>
 ```
 
 
