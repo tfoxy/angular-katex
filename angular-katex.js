@@ -27,11 +27,6 @@
             self.errorHandler(err, text, element);
           }
         };
-        self._renderFn = function(thisArg, element) {
-          return function(text) {
-            thisArg.render(element, text);
-          };
-        };
 
         //noinspection JSUnusedGlobalSymbols
         this.$get = function() {
@@ -51,10 +46,10 @@
           restrict: 'A',
           link: function(scope, element, attrs) {
             var model = attrs.katexBind;
-            var renderFn = katexConfig.render.bind || katexConfig._renderFn;
-            var render = renderFn(katexConfig, element);
 
-            scope.$watch(model, render);
+            scope.$watch(model, function(text) {
+              katexConfig.render(element, text);
+            });
           }
         };
       }]);
