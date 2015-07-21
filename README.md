@@ -1,7 +1,6 @@
-# angular-katex [![npm version](http://img.shields.io/npm/v/angular-katex.svg)](https://npmjs.org/package/angular-katex) ![bower version](https://img.shields.io/bower/v/angular-katex.svg)
-<!--- Travis badge
-[![build status](https://img.shields.io/travis/tfoxy/angular-katex.svg)](https://travis-ci.org/tfoxy/angular-katex)
--->
+# angular-katex
+
+[![npm version](http://img.shields.io/npm/v/angular-katex.svg)](https://npmjs.org/package/angular-katex) ![bower version](https://img.shields.io/bower/v/angular-katex.svg) [![build status](https://img.shields.io/travis/tfoxy/angular-katex.svg)](https://travis-ci.org/tfoxy/angular-katex)
 
 Display math with KaTex and AngularJS by using directives.
 
