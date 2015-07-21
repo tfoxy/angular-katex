@@ -10,7 +10,8 @@
   'use strict';
 
   angular.module('katex', [])
-      .provider('katexConfig', function() {
+      .constant('katex', katex)
+      .provider('katexConfig', ['katex', function(katex) {
         var self = this;
 
         self.errorTemplate = function(err) {
@@ -32,7 +33,7 @@
         this.$get = function() {
           return this;
         };
-      })
+      }])
       .directive('katex', ['katexConfig', function(katexConfig) {
         return {
           restrict: 'AE',
