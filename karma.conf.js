@@ -57,9 +57,17 @@ module.exports = function(config) {
     autoWatch: true,
 
 
+    customLaunchers: {
+      chromeTravisCi: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
+
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'Chrome'],
+    browsers: ['PhantomJS', process.env.TRAVIS ? 'chromeTravisCi' : 'Chrome'],
 
 
     // Continuous Integration mode
