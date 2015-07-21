@@ -33,20 +33,24 @@ describe('katex', function() {
 
     it('parses what is inside the tag if attribute has no value',
         inject(function() {
-      var element = compileAndDigest('<div katex>x^3</div>');
-      expect(element.text().slice(0, 2)).to.equals('x3');
-    }));
+          var element = compileAndDigest('<div katex>x^3</div>');
+          expect(element.text().slice(0, 2)).to.equals('x3');
+        }));
+
+  });
+
+  describe('attribute bind directive', function() {
 
     it('parses what is in the scope if attribute has a value',
         inject(function() {
-      scope.tex = {pow: 'x^4'};
-      var element = compileAndDigest('<div katex="tex.pow"></div>');
-      expect(element.text().slice(0, 2)).to.equals('x4');
-    }));
+          scope.tex = {pow: 'x^4'};
+          var element = compileAndDigest('<div katex-bind="tex.pow"></div>');
+          expect(element.text().slice(0, 2)).to.equals('x4');
+        }));
 
     it('updates the content if scope property is changed', inject(function() {
       scope.tex = 'x^5';
-      var element = compileAndDigest('<div katex="tex"></div>');
+      var element = compileAndDigest('<div katex-bind="tex"></div>');
       scope.tex = '2x';
       scope.$digest();
       expect(element.text().slice(0, 2)).to.equals('2x');

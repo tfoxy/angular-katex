@@ -11,11 +11,26 @@
 
   angular.module('katex', [])
       .provider('katexConfig', function() {
-        this.errorTemplate = function(err) {
+        var self = this;
+
+        self.errorTemplate = function(err) {
           return '<span class="katex-error">' + err + '</span>';
         };
-        this.errorHandler = function(err, text, element) {
-          element.html(this.errorTemplate(err, text));
+        self.errorHandler = function(err, text, element) {
+          element.html(self.errorTemplate(err, text));
+        };
+
+        self.render = function(element, text) {
+          try {
+            katex.render(text || '', element[0]);
+          } catch (err) {
+            self.errorHandler(err, text, element);
+          }
+        };
+        self._renderFn = function(thisArg, element) {
+          return function(text) {
+            thisArg.render(element, text);
+          };
         };
 
         //noinspection JSUnusedGlobalSymbols
@@ -26,22 +41,20 @@
       .directive('katex', ['katexConfig', function(katexConfig) {
         return {
           restrict: 'AE',
+          compile: function(element) {
+            katexConfig.render(element, element.html());
+          }
+        };
+      }])
+      .directive('katexBind', ['katexConfig', function(katexConfig) {
+        return {
+          restrict: 'A',
           link: function(scope, element, attrs) {
-            var model = attrs.katex;
+            var model = attrs.katexBind;
+            var renderFn = katexConfig.render.bind || katexConfig._renderFn;
+            var render = renderFn(katexConfig, element);
 
-            var render = function(text) {
-              try {
-                katex.render(text || '', element[0]);
-              } catch (err) {
-                katexConfig.errorHandler(err, text, element);
-              }
-            };
-
-            if (model) {
-              scope.$watch(model, render);
-            } else {
-              render(element.html());
-            }
+            scope.$watch(model, render);
           }
         };
       }]);
