@@ -43,6 +43,9 @@ angular.module('myApp', ['katex', ...])
 <!-- Attribute -->
 <div katex>x^2</div>
 
+<!-- Attribute value -->
+<div katex="x^2"></div>
+
 <!-- Bind to scope property
   $scope.tex = {pow: 'x^2'}
   -->
