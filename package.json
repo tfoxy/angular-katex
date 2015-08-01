@@ -21,6 +21,9 @@
     "tex"
   ],
   "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "phantomjs": "*",
     "karma": "0.12.x",
     "karma-mocha": "0.2.x",
     "karma-chai": "0.1.x",
