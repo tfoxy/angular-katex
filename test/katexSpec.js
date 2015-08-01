@@ -37,6 +37,12 @@ describe('katex', function() {
           expect(element.text().slice(0, 2)).to.equals('x3');
         }));
 
+    it('parses the attribute value if attribute has a value',
+        inject(function() {
+          var element = compileAndDigest('<div katex="x^3"></div>');
+          expect(element.text().slice(0, 2)).to.equals('x3');
+        }));
+
   });
 
   describe('attribute bind directive', function() {

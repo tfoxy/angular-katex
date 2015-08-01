@@ -37,8 +37,8 @@
       .directive('katex', ['katexConfig', function(katexConfig) {
         return {
           restrict: 'AE',
-          compile: function(element) {
-            katexConfig.render(element, element.html());
+          compile: function(element, attrs) {
+            katexConfig.render(element, attrs.katex || element.html());
           }
         };
       }])
