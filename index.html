@@ -9,12 +9,13 @@
     <!-- NO ICON -->
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
 
+    <link rel="stylesheet" type="text/css" media="screen" href="bower_components/katex/dist/katex.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
     <title>angular-katex</title>
   </head>
 
-  <body>
+  <body ng-app="app" ng-controller="Ctrl">
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
@@ -60,21 +61,35 @@
 <div class="highlight highlight-javascript"><pre>angular.module(<span class="pl-s"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>katex<span class="pl-pds">'</span></span>, ...])</pre></div>
 
 <h2>
-<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage examples</h2>
+  <a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true">
+    <span class="octicon octicon-link"></span>
+  </a>
+  Usage examples
+</h2>
 
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- Tag element --&gt;</span>
-&lt;<span class="pl-ent">katex</span>&gt;x^2&lt;/<span class="pl-ent">katex</span>&gt;
+&lt;<span class="pl-ent">katex</span>&gt;x^2&lt;/<span class="pl-ent">katex</span>&gt;</pre></div>
 
-<span class="pl-c">&lt;!-- Attribute --&gt;</span>
-&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>&gt;x^2&lt;/<span class="pl-ent">div</span>&gt;
+        <katex>x^2</katex>
 
-<span class="pl-c">&lt;!-- Attribute value --&gt;</span>
-&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>=<span class="pl-s"><span class="pl-pds">"</span>x^2<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+<div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- Attribute --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>&gt;x^2&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
 
-<span class="pl-c">&lt;!-- Bind to scope property</span>
-<span class="pl-c">  $scope.tex = {pow: 'x^2'}</span>
+        <div katex>x^2</div>
+
+        <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- Attribute value --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>=<span class="pl-s"><span class="pl-pds">"</span>x^2<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+        <div katex="x^2"></div>
+
+<div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- Bind to scope property</span>
+<span class="pl-c">  $scope.tex = 'x^2'</span>
 <span class="pl-c">  --&gt;</span>
-&lt;<span class="pl-ent">div</span> <span class="pl-e">katex-bind</span>=<span class="pl-s"><span class="pl-pds">"</span>tex.pow<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+&lt;<span class="pl-ent">input</span> <span class="pl-e">ng-model</span>=<span class="pl-s"><span class="pl-pds">"</span>tex<span class="pl-pds">"</span></span> <span class="pl-e">title</span>=<span class="pl-s"><span class="pl-pds">"</span>Insert latex here<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex-bind</span>=<span class="pl-s"><span class="pl-pds">"</span>tex<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+        <input ng-model="tex" title="Insert latex here">
+        <div katex-bind="tex"></div>
 
 <h2>
 <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
@@ -104,7 +119,10 @@ This function can be used to use MathJax as a fallback.</li>
       </footer>
     </div>
 
-    <
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/katex/dist/katex.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-katex/angular-katex.min.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
 
   </body>
 </html>

@@ -423,3 +423,12 @@ Small Device Styles
   }
 
 }
+
+.katex {
+  line-height: 2;
+}
+
+.katex-error {
+  color: red;
+  line-height: 2.4;
+}
