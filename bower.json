@@ -1,6 +1,5 @@
 {
   "name": "angular-katex",
-  "version": "0.2.1",
   "main": "./angular-katex.js",
   "homepage": "https://github.com/tfoxy/angular-katex",
   "dependencies": {
