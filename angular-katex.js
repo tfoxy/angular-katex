@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.3.0
+ * angular-katex v0.4.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
