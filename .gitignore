@@ -47,3 +47,11 @@ crashlytics.properties
 crashlytics-build.properties
 
 
+### BOWER
+bower_components/
+!bower_components/angular/angular.min.js
+!bower_components/angular/angular.min.js.map
+!bower_components/angular-katex/angular-katex.min.js
+!bower_components/katex/dist/katex.min.css
+!bower_components/katex/dist/katex.min.js
+
