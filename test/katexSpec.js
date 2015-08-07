@@ -27,6 +27,11 @@ describe('katex', function() {
       expect(element.text().slice(0, 2)).to.equals('x2');
     }));
 
+    it('parses the node text, not html', inject(function() {
+      var element = compileAndDigest('<katex>&lt;</katex>');
+      expect(element.text().charAt(0)).to.equals('<');
+    }));
+
   });
 
   describe('attribute directive', function() {
@@ -60,6 +65,20 @@ describe('katex', function() {
       scope.tex = '2x';
       scope.$digest();
       expect(element.text().slice(0, 2)).to.equals('2x');
+    }));
+
+  });
+
+  describe('html directive', function() {
+
+    it('parses the html inside the node', inject(function() {
+      var element = compileAndDigest('<katex-html>\\&lt;</katex-html>');
+      expect(element.text().slice(0, 4)).to.equals('&lt;');
+    }));
+
+    it('parses the html in the attribute value', inject(function() {
+      var element = compileAndDigest('<div katex-html="\\&lt;"></div>');
+      expect(element.text().slice(0, 4)).to.equals('&lt;');
     }));
 
   });

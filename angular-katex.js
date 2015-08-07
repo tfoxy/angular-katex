@@ -38,7 +38,7 @@
         return {
           restrict: 'AE',
           compile: function(element, attrs) {
-            katexConfig.render(element, attrs.katex || element.html());
+            katexConfig.render(element, attrs.katex || element.text());
           }
         };
       }])
@@ -51,6 +51,17 @@
             scope.$watch(model, function(text) {
               katexConfig.render(element, text);
             });
+          }
+        };
+      }])
+      .directive('katexHtml', ['katexConfig', function(katexConfig) {
+        return {
+          restrict: 'AE',
+          compile: function(element, attrs) {
+            var exprElement = attrs.katexHtml ?
+                angular.element('<div>' + attrs.katexHtml + '</div>') :
+                element;
+            katexConfig.render(element, exprElement.html());
           }
         };
       }]);
