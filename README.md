@@ -19,6 +19,12 @@ You can get it from [Bower](http://bower.io/)
 bower install angular-katex
 ```
 
+or [npm](http://npmjs.com/)
+
+```sh
+npm install angular-katex
+```
+
 Load the script files in your application:
 
 ```html
@@ -35,6 +41,8 @@ angular.module('myApp', ['katex', ...])
 
 
 ## Usage examples
+
+[Live demo](http://jsbin.com/bidici/edit?html,output)
 
 ```html
 <!-- Tag element -->
