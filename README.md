@@ -65,10 +65,12 @@ angular.module('myApp', ['katex', ...])
 
 `katexConfigProvider` have the following properties:
  
-   - `errorTemplate`: function that returns the html to use when there is an error parsing the expression.
-   It has one parameter: `error`.
-   By default, it returns a span element with the error message and the `katex-error` class: `<span class="katex-error">Error: message</span>`
-   - `errorHandler`: function that is called when there is an error while parsing the expression.
-   It has three parameters: `error`, `text`, `element`. `text` is the math expression.
-   By default, it sets the html of the element by calling `errorTemplate`.
-   This function can be used to use MathJax as a fallback.
+  - `defaultOptions`: object that is passed to the `katex.render` function as the options parameter.
+  By default, it is `{}`.
+  - `errorTemplate`: function that returns the html to use when there is an error parsing the expression.
+  It has two parameters: `error`, `expr`.
+  By default, it returns a span element with the error message and the `katex-error` class: `<span class="katex-error">Error: message</span>`
+  - `errorHandler`: function that is called when there is an error while parsing the expression.
+  It has three parameters: `error`, `expr`, `element`.
+  By default, it sets the html of the element by calling `errorTemplate`.
+  This function can be used to use MathJax as a fallback.

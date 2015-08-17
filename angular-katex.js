@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.4.0
+ * angular-katex v0.5.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -14,18 +14,20 @@
       .provider('katexConfig', ['katex', function(katex) {
         var self = this;
 
+        self.defaultOptions = {};
+
         self.errorTemplate = function(err) {
           return '<span class="katex-error">' + err + '</span>';
         };
-        self.errorHandler = function(err, text, element) {
-          element.html(self.errorTemplate(err, text));
+        self.errorHandler = function(err, expr, element) {
+          element.html(self.errorTemplate(err, expr));
         };
 
-        self.render = function(element, text) {
+        self.render = function(element, expr) {
           try {
-            katex.render(text || '', element[0]);
+            katex.render(expr || '', element[0], self.defaultOptions);
           } catch (err) {
-            self.errorHandler(err, text, element);
+            self.errorHandler(err, expr, element);
           }
         };
 
@@ -48,8 +50,8 @@
           link: function(scope, element, attrs) {
             var model = attrs.katexBind;
 
-            scope.$watch(model, function(text) {
-              katexConfig.render(element, text);
+            scope.$watch(model, function(expr) {
+              katexConfig.render(element, expr);
             });
           }
         };
