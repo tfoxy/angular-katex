@@ -11,60 +11,86 @@
 
   angular.module('katex', [])
       .constant('katex', katex)
-      .provider('katexConfig', ['katex', function(katex) {
-        var self = this;
+      .factory('katexConfig', katexConfigFactory)
+      .directive('katex', katexDirective)
+      .directive('katexBind', katexBindDirective)
+      .directive('katexHtml', katexHtmlDirective);
 
-        self.defaultOptions = {};
 
-        self.errorTemplate = function(err) {
-          return '<span class="katex-error">' + err + '</span>';
-        };
-        self.errorHandler = function(err, expr, element) {
-          element.html(self.errorTemplate(err, expr));
-        };
+  katexConfigFactory.$inject = ['katex'];
 
-        self.render = function(element, expr) {
-          try {
-            katex.render(expr || '', element[0], self.defaultOptions);
-          } catch (err) {
-            self.errorHandler(err, expr, element);
-          }
-        };
+  function katexConfigFactory(katex) {
+    var service = {
+      defaultOptions: {},
+      errorTemplate: function(err) {
+        return '<span class="katex-error">' + err + '</span>';
+      },
+      errorHandler: function(err, expr, element) {
+        element.html(service.errorTemplate(err, expr));
+      },
+      render: function(element, expr, elementOptions) {
+        try {
+          var options = elementOptions || service.defaultOptions;
+          katex.render(expr || '', element[0], options);
+        } catch (err) {
+          service.errorHandler(err, expr, element);
+        }
+      }
+    };
 
-        //noinspection JSUnusedGlobalSymbols
-        this.$get = function() {
-          return this;
-        };
-      }])
-      .directive('katex', ['katexConfig', function(katexConfig) {
-        return {
-          restrict: 'AE',
-          compile: function(element, attrs) {
-            katexConfig.render(element, attrs.katex || element.text());
-          }
-        };
-      }])
-      .directive('katexBind', ['katexConfig', function(katexConfig) {
-        return {
-          restrict: 'A',
-          link: function(scope, element, attrs) {
-            var model = attrs.katexBind;
+    return service;
+  }
 
-            scope.$watch(model, function(expr) {
-              katexConfig.render(element, expr);
-            });
-          }
-        };
-      }])
-      .directive('katexHtml', ['katexConfig', function(katexConfig) {
-        return {
-          restrict: 'AE',
-          compile: function(element, attrs) {
-            var exprElement = attrs.katexHtml ?
-                angular.element('<div>' + attrs.katexHtml + '</div>') :
-                element;
-            katexConfig.render(element, exprElement.html());
-          }
-        };
-      }]);
+
+  katexDirective.$inject = ['katexConfig', '$rootScope'];
+
+  function katexDirective(katexConfig, $rootScope) {
+    return {
+      restrict: 'AE',
+      compile: function(element, attrs) {
+        var expr = attrs.katex || element.text();
+        var options = getOptions($rootScope, attrs);
+        katexConfig.render(element, expr, options);
+      }
+    };
+  }
+
+
+  katexBindDirective.$inject = ['katexConfig'];
+
+  function katexBindDirective(katexConfig) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        var model = attrs.katexBind;
+
+        scope.$watch(model, function(expr) {
+          var options = getOptions(scope, attrs);
+          katexConfig.render(element, expr, options);
+        });
+      }
+    };
+  }
+
+
+  katexHtmlDirective.$inject = ['katexConfig', '$rootScope'];
+
+  function katexHtmlDirective(katexConfig, $rootScope) {
+    return {
+      restrict: 'AE',
+      compile: function(element, attrs) {
+        var exprElement = attrs.katexHtml ?
+            angular.element('<div>' + attrs.katexHtml + '</div>') :
+            element;
+        var options = getOptions($rootScope, attrs);
+        katexConfig.render(element, exprElement.html(), options);
+      }
+    };
+  }
+
+
+  function getOptions(scope, attrs) {
+    var katexOptions = attrs.katexOptions;
+    return katexOptions && scope.$eval(katexOptions);
+  }
 })();

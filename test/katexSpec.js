@@ -46,6 +46,14 @@ describe('katex', function() {
       expect(element.find('mrow').text()).to.equals('x3');
     });
 
+    it('renders the expression in display mode if katexOptions is used',
+        function() {
+          var t = '<div katex="x" katex-options="{displayMode: true}"></div>';
+          var element = compileAndDigest(t);
+          var displayElement = angular.element(element[0].firstChild);
+          assert.isTrue(displayElement.hasClass('katex-display'));
+        });
+
   });
 
   describe('attribute bind directive', function() {
