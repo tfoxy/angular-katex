@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.5.0
+ * angular-katex v0.6.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -17,16 +17,17 @@
       .directive('katexHtml', katexHtmlDirective);
 
 
-  katexConfigFactory.$inject = ['katex'];
+  katexConfigFactory.$inject = ['katex', '$document'];
 
-  function katexConfigFactory(katex) {
+  function katexConfigFactory(katex, $document) {
     var service = {
       defaultOptions: {},
-      errorTemplate: function(err) {
-        return '<span class="katex-error">' + err + '</span>';
-      },
       errorHandler: function(err, expr, element) {
-        element.html(service.errorTemplate(err, expr));
+        var span = $document[0].createElement('span');
+        span.className = 'katex-error';
+        span.textContent = err;
+        element.children().remove();
+        element.append(span);
       },
       render: function(element, expr, elementOptions) {
         try {
