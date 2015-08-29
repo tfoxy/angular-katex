@@ -63,6 +63,10 @@ angular.module('myApp', ['katex', ...])
 <div katex="x^2" katex-options="{displayMode: true}"></div>
 
 <!-- Set error handler -->
+<!-- katex-on-error locals:
+  $expr: (string) expression
+  $err: (object) error
+  $setText: (function) set element text -->
 <div katex="\" katex-on-error="$setText('Bad Expression: ' + $expr + ' . ' + $err)"></div>
 ```
 
