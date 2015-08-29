@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.6.0
+ * angular-katex v0.7.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -29,12 +29,12 @@
         element.children().remove();
         element.append(span);
       },
-      render: function(element, expr, elementOptions) {
+      render: function(element, expr, elementOptions, errorHandler) {
         try {
           var options = elementOptions || service.defaultOptions;
           katex.render(expr || '', element[0], options);
         } catch (err) {
-          service.errorHandler(err, expr, element);
+          errorHandler(err, expr, element);
         }
       }
     };
@@ -51,7 +51,8 @@
       compile: function(element, attrs) {
         var expr = attrs.katex || element.text();
         var options = getOptions($rootScope, attrs);
-        katexConfig.render(element, expr, options);
+        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
+        katexConfig.render(element, expr, options, errorHandler);
       }
     };
   }
@@ -64,10 +65,11 @@
       restrict: 'A',
       link: function(scope, element, attrs) {
         var model = attrs.katexBind;
+        var errorHandler = getErrorHandler(scope, attrs, katexConfig);
 
         scope.$watch(model, function(expr) {
           var options = getOptions(scope, attrs);
-          katexConfig.render(element, expr, options);
+          katexConfig.render(element, expr, options, errorHandler);
         });
       }
     };
@@ -84,7 +86,8 @@
             angular.element('<div>' + attrs.katexHtml + '</div>') :
             element;
         var options = getOptions($rootScope, attrs);
-        katexConfig.render(element, exprElement.html(), options);
+        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
+        katexConfig.render(element, exprElement.html(), options, errorHandler);
       }
     };
   }
@@ -93,5 +96,24 @@
   function getOptions(scope, attrs) {
     var katexOptions = attrs.katexOptions;
     return katexOptions && scope.$eval(katexOptions);
+  }
+
+
+  function getErrorHandler(scope, attrs, katexConfig) {
+    var katexOnError = attrs.katexOnError;
+
+    if (katexOnError) {
+      return function katexOnErrorFn(err, expr, element) {
+        scope.$eval(katexOnError, {
+          $err: err,
+          $expr: expr,
+          $setText: function(text) {
+            element.text(text);
+          }
+        });
+      };
+    }
+
+    return katexConfig.errorHandler;
   }
 })();

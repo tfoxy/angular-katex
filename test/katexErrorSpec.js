@@ -16,8 +16,18 @@ describe('katexError', function() {
     };
   }));
 
-  it('inserts a node with katex-error class when there is an error', function() {
-    var element = compileAndDigest('<div katex="\\"></div>');
-    assert.isTrue(element.children().hasClass('katex-error'));
+  describe('when there is an error', function() {
+
+    it('inserts a node with katex-error class', function() {
+      var element = compileAndDigest('<div katex="\\"></div>');
+      assert.isTrue(element.children().hasClass('katex-error'));
+    });
+
+    it('evaluates katexOnError if present', function() {
+      var t = '<div katex="\\" katex-on-error="$setText(\'E:\'+$expr)"></div>';
+      var element = compileAndDigest(t);
+      expect(element.text()).to.equal('E:\\');
+    });
+
   });
 });
