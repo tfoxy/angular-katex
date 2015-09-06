@@ -11,10 +11,18 @@
 
   angular.module('katex', [])
       .constant('katex', katex)
+      .constant('renderMathInElement', getRenderMathInElement())
       .provider('katexConfig', katexConfigProvider)
       .directive('katex', katexDirective)
       .directive('katexBind', katexBindDirective)
       .directive('katexHtml', katexHtmlDirective);
+
+
+  function getRenderMathInElement() {
+    return typeof renderMathInElement !== 'undefined' ?
+        renderMathInElement :
+        undefined;
+  }
 
 
   katexConfigProvider.$inject = ['katex'];

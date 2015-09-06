@@ -18,6 +18,7 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/katex/dist/katex.min.js',
+      'bower_components/katex/dist/contrib/auto-render.min.js',
       'angular-katex.js',
       'test/*Spec.js'
     ],
