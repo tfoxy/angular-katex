@@ -23,8 +23,9 @@
     var service = {
       $get: function() {return service;},
       defaultOptions: {},
+      errorElement: '<span class="katex-error"></span>',
       errorHandler: function(err, expr, element) {
-        var span = angular.element('<span class="katex-error"></span>');
+        var span = angular.element(service.errorElement);
         span.textContent = err;
         element.children().remove();
         element.append(span);
