@@ -11,20 +11,20 @@
 
   angular.module('katex', [])
       .constant('katex', katex)
-      .factory('katexConfig', katexConfigFactory)
+      .provider('katexConfig', katexConfigProvider)
       .directive('katex', katexDirective)
       .directive('katexBind', katexBindDirective)
       .directive('katexHtml', katexHtmlDirective);
 
 
-  katexConfigFactory.$inject = ['katex', '$document'];
+  katexConfigProvider.$inject = ['katex'];
 
-  function katexConfigFactory(katex, $document) {
+  function katexConfigProvider(katex) {
     var service = {
+      $get: function() {return service;},
       defaultOptions: {},
       errorHandler: function(err, expr, element) {
-        var span = $document[0].createElement('span');
-        span.className = 'katex-error';
+        var span = angular.element('<span class="katex-error"></span>');
         span.textContent = err;
         element.children().remove();
         element.append(span);
