@@ -88,7 +88,7 @@ describe('katex', function() {
 
   });
 
-  describe('katexConfigProvider', function() {
+  describe('katexConfig', function() {
 
     it('has a defaultOptions that is used as the render options',
         inject(function(katexConfig) {
