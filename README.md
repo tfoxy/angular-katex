@@ -66,9 +66,20 @@ angular.module('myApp', ['katex', ...])
 <!-- katex-on-error locals:
   $expr: (string) expression
   $err: (object) error
-  $setText: (function) set element text -->
+  $setText: (function) set element text
+  -->
 <div katex="\" katex-on-error="$setText('Bad Expression: ' + $expr + ' . ' + $err)"></div>
+
+<!-- Use auto-render (with katex or katex-bind) -->
+<div katex katex-auto-render>
+  <p>The following formula is rendered</p>
+  $$x^2$$
+</div>
 ```
+
+To use the [auto-render extension](https://github.com/Khan/KaTeX/tree/master/contrib/auto-render),
+the file `auto-render.min.js` is needed.
+If you installed katex with bower, it is inside `bower_components/katex/dist/contrib`.
 
 
 ## Configuration
