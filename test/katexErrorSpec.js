@@ -23,6 +23,11 @@ describe('katexError', function() {
       assert.isTrue(element.children().hasClass('katex-error'));
     });
 
+    it('inserts a node with the error text', function() {
+      var element = compileAndDigest('<div katex="\\"></div>');
+      expect(element.text()).to.match(/^ParseError: /);
+    });
+
     it('evaluates katexOnError if present', function() {
       var t = '<div katex="\\" katex-on-error="$setText(\'E:\'+$expr)"></div>';
       var element = compileAndDigest(t);

@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.8.0
+ * angular-katex v0.8.1
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -36,7 +36,7 @@
       errorElement: '<span class="katex-error"></span>',
       errorHandler: function(err, expr, element) {
         var span = angular.element(service.errorElement);
-        span.textContent = err;
+        span.text(err);
         element.children().remove();
         element.append(span);
       },
