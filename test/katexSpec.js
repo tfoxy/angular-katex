@@ -74,6 +74,7 @@ describe('katex', function() {
 
   });
 
+  /*
   describe('html directive', function() {
 
     it('parses the html inside the node', function() {
@@ -87,13 +88,14 @@ describe('katex', function() {
     });
 
   });
+  */
 
   describe('katexConfig', function() {
 
     it('has a defaultOptions that is used as the render options',
         inject(function(katexConfig) {
           katexConfig.defaultOptions = {displayMode: true};
-          var element = compileAndDigest('<div katex-html="\\&lt;"></div>');
+          var element = compileAndDigest('<div katex="x^2"></div>');
           var displayElement = angular.element(element[0].firstChild);
           assert.isTrue(displayElement.hasClass('katex-display'));
         }));

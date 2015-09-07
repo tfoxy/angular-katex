@@ -14,9 +14,10 @@
       .constant('renderMathInElement', getRenderMathInElement())
       .provider('katexConfig', katexConfigProvider)
       .directive('katex', katexDirective)
-      .directive('katexBind', katexBindDirective)
-      .directive('katexHtmlBind', katexHtmlBindDirective)
-      .directive('katexHtml', katexHtmlDirective);
+      .directive('katexBind', katexBindDirective);
+  // These directives are not being used
+  //  .directive('katexHtmlBind', katexHtmlBindDirective)
+  //  .directive('katexHtml', katexHtmlDirective);
 
 
   function getRenderMathInElement() {
@@ -102,6 +103,7 @@
   }
 
 
+  /*
   katexHtmlBindDirective.$inject = ['katexConfig'];
 
   function katexHtmlBindDirective(katexConfig) {
@@ -146,7 +148,7 @@
       }
     };
   }
-
+  */
 
   function getOptions(scope, attrs) {
     var katexOptions = attrs.katexOptions;
