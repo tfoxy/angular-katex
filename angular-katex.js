@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.8.1
+ * angular-katex v0.8.2
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -71,6 +71,9 @@
         var options = getOptions($rootScope, attrs);
         var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
         if ('katexAutoRender' in attrs) {
+          if (attrs.katex) {
+            element.text(attrs.katex);
+          }
           katexConfig.autoRender(element, options, errorHandler);
         } else {
           var expr = attrs.katex || element.text();
