@@ -51,6 +51,20 @@ describe('katexAutoRender', function() {
 
   });
 
+  describe('attribute directive', function() {
+
+    it('inserts attribute value as text if attribute has a value', function() {
+      var element = compileAndDigest('<div katex="x^3" katex-auto-render></div>');
+      expect(element.text()).to.equals('x^3');
+    });
+
+    it('renders math in the attribute value', function() {
+      var element = compileAndDigest('<div katex="$$x^4$$" katex-auto-render></div>');
+      expect(element.find('mrow').text()).to.equals('x4');
+    });
+
+  });
+
   describe('attribute bind directive', function() {
 
     it('does not renders math without delimiters', function() {

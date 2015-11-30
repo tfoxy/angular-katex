@@ -94,7 +94,16 @@
   function katexDirective(katexConfig, $rootScope) {
     return {
       restrict: 'AE',
-      compile: compile
+      compile: function(element, attrs) {
+        var options = getOptions($rootScope, attrs);
+        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
+        if ('katexAutoRender' in attrs) {
+          katexConfig.autoRender(element, options, errorHandler);
+        } else {
+          var expr = attrs.katex || element.text();
+          katexConfig.render(element, expr, options, errorHandler);
+        }
+      }
     };
 
     function compile(element, attrs) {
