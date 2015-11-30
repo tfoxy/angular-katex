@@ -94,16 +94,7 @@
   function katexDirective(katexConfig, $rootScope) {
     return {
       restrict: 'AE',
-      compile: function(element, attrs) {
-        var options = getOptions($rootScope, attrs);
-        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
-        if ('katexAutoRender' in attrs) {
-          katexConfig.autoRender(element, options, errorHandler);
-        } else {
-          var expr = attrs.katex || element.text();
-          katexConfig.render(element, expr, options, errorHandler);
-        }
-      }
+      compile: compile
     };
 
     function compile(element, attrs) {
@@ -116,6 +107,11 @@
           expr = attrs.expr || attrs.katex;
           if (hasHtmlModeOn($rootScope, attrs)) {
             expr = angular.element('<div>' + expr + '</div>').html();
+          }
+          if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
+            element.text(expr);
+            katexConfig.autoRender(element, $rootScope, attrs);
+            return;
           }
         } else if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
           katexConfig.autoRender(element, $rootScope, attrs);
