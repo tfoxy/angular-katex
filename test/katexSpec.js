@@ -51,7 +51,7 @@ describe('katex', function() {
           var t = '<div katex="x" katex-options="{displayMode: true}"></div>';
           var element = compileAndDigest(t);
           var displayElement = angular.element(element[0].firstChild);
-          assert.isTrue(displayElement.hasClass('katex-display'));
+          assert.isTrue(displayElement.hasClass('katex-display'), element.html());
         });
 
   });

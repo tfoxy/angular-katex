@@ -20,7 +20,7 @@ describe('katexError', function() {
 
     it('inserts a node with katex-error class', function() {
       var element = compileAndDigest('<div katex="\\"></div>');
-      assert.isTrue(element.children().hasClass('katex-error'));
+      assert.isTrue(element.children().hasClass('katex-error'), element.html());
     });
 
     it('inserts a node with the error text', function() {

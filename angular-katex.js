@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.8.1
+ * angular-katex v0.9.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -15,9 +15,6 @@
       .provider('katexConfig', katexConfigProvider)
       .directive('katex', katexDirective)
       .directive('katexBind', katexBindDirective);
-  // These directives are not being used
-  //  .directive('katexHtmlBind', katexHtmlBindDirective)
-  //  .directive('katexHtml', katexHtmlDirective);
 
 
   function getRenderMathInElement() {
@@ -40,25 +37,55 @@
         element.children().remove();
         element.append(span);
       },
-      render: function(element, expr, elementOptions, errorHandler) {
+      render: function render(element, expr, scope, attrs) {
         try {
-          var options = elementOptions || service.defaultOptions;
+          var options = getOptions(scope, attrs);
           katex.render(expr || '', element[0], options);
         } catch (err) {
-          errorHandler(err, expr, element);
+          getErrorHandler(scope, attrs)(err, expr, element);
         }
       },
-      autoRender: function(element, elementOptions, errorHandler) {
+      autoRender: function autoRender(element, scope, attrs) {
         try {
-          var options = elementOptions || service.defaultOptions;
+          var options = getOptions(scope, attrs);
           renderMathInElement(element[0], options);
         } catch (err) {
-          errorHandler(err, null, element);
+          getErrorHandler(scope, attrs)(err, null, element);
         }
       }
     };
 
     return service;
+
+    function getOptions(scope, attrs) {
+      var options = angular.extend({}, service.defaultOptions);
+      if ('options' in attrs) {
+        angular.extend(options, scope.$eval(attrs.options));
+      }
+      if ('katexOptions' in attrs) {
+        angular.extend(options, scope.$eval(attrs.katexOptions));
+      }
+      if ('displayMode' in attrs) {
+        angular.extend(options, {displayMode: true});
+      }
+      return options;
+    }
+
+    function getErrorHandler(scope, attrs) {
+      if ('onError' in attrs || 'katexOnError' in attrs) {
+        return function katexOnErrorFn(err, expr, element) {
+          scope.$eval(attrs.onError || attrs.katexOnError, {
+            $err: err,
+            $expr: expr,
+            $setText: function(text) {
+              element.text(text);
+            }
+          });
+        };
+      } else {
+        return service.errorHandler;
+      }
+    }
   }
 
 
@@ -67,17 +94,49 @@
   function katexDirective(katexConfig, $rootScope) {
     return {
       restrict: 'AE',
-      compile: function(element, attrs) {
-        var options = getOptions($rootScope, attrs);
-        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
-        if ('katexAutoRender' in attrs) {
-          katexConfig.autoRender(element, options, errorHandler);
-        } else {
-          var expr = attrs.katex || element.text();
-          katexConfig.render(element, expr, options, errorHandler);
-        }
-      }
+      compile: compile
     };
+
+    function compile(element, attrs) {
+      if ('bind' in attrs) {
+        return link;
+      } else {
+        var expr;
+
+        if ('expr' in attrs || attrs.katex) {
+          expr = attrs.expr || attrs.katex;
+          if (hasHtmlModeOn($rootScope, attrs)) {
+            expr = angular.element('<div>' + expr + '</div>').html();
+          }
+        } else if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
+          katexConfig.autoRender(element, $rootScope, attrs);
+          return;
+        } else {
+          expr = hasHtmlModeOn($rootScope, attrs) ?
+              element.html() :
+              element.text();
+        }
+
+        katexConfig.render(element, expr, $rootScope, attrs);
+      }
+    }
+
+    function link(scope, element, attrs) {
+      if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
+        scope.$watch(attrs.bind, function(expr) {
+          if (hasHtmlModeOff(scope, attrs)) {
+            element.text(expr);
+          } else {
+            element.html(expr);
+          }
+          katexConfig.autoRender(element, scope, attrs);
+        });
+      } else {
+        scope.$watch(attrs.bind, function(expr) {
+          katexConfig.render(element, expr, scope, attrs);
+        });
+      }
+    }
   }
 
 
@@ -87,15 +146,12 @@
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
-        var errorHandler = getErrorHandler(scope, attrs, katexConfig);
-
         scope.$watch(attrs.katexBind, function(expr) {
-          var options = getOptions(scope, attrs);
-          if ('katexAutoRender' in attrs) {
+          if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
             element.text(expr);
-            katexConfig.autoRender(element, options, errorHandler);
+            katexConfig.autoRender(element, scope, attrs);
           } else {
-            katexConfig.render(element, expr, options, errorHandler);
+            katexConfig.render(element, expr, scope, attrs);
           }
         });
       }
@@ -103,72 +159,11 @@
   }
 
 
-  /*
-  katexHtmlBindDirective.$inject = ['katexConfig'];
-
-  function katexHtmlBindDirective(katexConfig) {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attrs) {
-        var errorHandler = getErrorHandler(scope, attrs, katexConfig);
-
-        scope.$watch(attrs.katexHtmlBind, function(expr) {
-          var options = getOptions(scope, attrs);
-          if ('katexAutoRender' in attrs) {
-            element.html(expr);
-            katexConfig.autoRender(element, options, errorHandler);
-          } else {
-            var exprElement = angular.element('<div>' + expr + '</div>');
-            var htmlExpr = exprElement.html();
-            katexConfig.render(element, htmlExpr, options, errorHandler);
-          }
-        });
-      }
-    };
+  function hasHtmlModeOn(scope, attrs) {
+    return 'htmlMode' in attrs && (!attrs.htmlMode || scope.$eval(attrs.htmlMode));
   }
 
-
-  katexHtmlDirective.$inject = ['katexConfig', '$rootScope'];
-
-  function katexHtmlDirective(katexConfig, $rootScope) {
-    return {
-      restrict: 'AE',
-      compile: function(element, attrs) {
-        var options = getOptions($rootScope, attrs);
-        var errorHandler = getErrorHandler($rootScope, attrs, katexConfig);
-        if ('katexAutoRender' in attrs) {
-          katexConfig.autoRender(element, options, errorHandler);
-        } else {
-          var exprElement = attrs.katexHtml ?
-              angular.element('<div>' + attrs.katexHtml + '</div>') :
-              element;
-          var expr = exprElement.html();
-          katexConfig.render(element, expr, options, errorHandler);
-        }
-      }
-    };
-  }
-  */
-
-  function getOptions(scope, attrs) {
-    var katexOptions = attrs.katexOptions;
-    return katexOptions && scope.$eval(katexOptions);
-  }
-
-
-  function getErrorHandler(scope, attrs, katexConfig) {
-    if ('katexOnError' in attrs) {
-      return function katexOnErrorFn(err, expr, element) {
-        scope.$eval(attrs.katexOnError, {
-          $err: err,
-          $expr: expr,
-          $setText: function(text) {
-            element.text(text);
-          }
-        });
-      };
-    } else {
-      return katexConfig.errorHandler;
-    }
+  function hasHtmlModeOff(scope, attrs) {
+    return 'htmlMode' in attrs && !scope.$eval(attrs.htmlMode);
   }
 })();
