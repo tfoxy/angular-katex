@@ -54,24 +54,28 @@ angular.module('myApp', ['katex', ...])
 <!-- Attribute value -->
 <div katex="x^2"></div>
 
+<!-- expr attribute value -->
+<katex expr="x^2"></katex>
+
 <!-- Bind to scope
   $scope.tex = {pow: 'x^2'}
   -->
 <div katex-bind="tex.pow"></div>
+<katex bind="tex.pow"></katex>
 
-<!-- Set options (Display mode) -->
-<div katex="x^2" katex-options="{displayMode: true}"></div>
+<!-- Set display mode -->
+<katex expr="x^2" display-mode></katex>
 
 <!-- Set error handler -->
-<!-- katex-on-error locals:
+<!-- on-error locals:
   $expr: (string) expression
   $err: (object) error
   $setText: (function) set element text
   -->
-<div katex="\" katex-on-error="$setText('Bad Expression: ' + $expr + ' . ' + $err)"></div>
+<katex expr="\" on-error="$setText('Bad Expression: ' + $expr + ' . ' + $err)"></katex>
 
-<!-- Use auto-render (with katex or katex-bind) -->
-<div katex katex-auto-render>
+<!-- Use auto-render -->
+<div katex auto-render>
   <p>The following formula is rendered</p>
   $$x^2$$
 </div>
