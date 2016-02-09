@@ -1,139 +1,154 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="description" content="angular-katex : Use KaTex with AngularJS">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="angular-katex : Use KaTex with AngularJS">
 
-  <!-- NO ICON -->
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-  <link rel="stylesheet" type="text/css" media="screen" href="bower_components/katex/dist/katex.min.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <title>angular-katex</title>
+  </head>
 
-  <title>angular-katex</title>
-</head>
+  <body>
 
-<body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/tfoxy/angular-katex">View on GitHub</a>
 
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-  <header class="inner">
-    <a id="forkme_banner" href="https://github.com/tfoxy/angular-katex">View on GitHub</a>
+          <h1 id="project_title">angular-katex</h1>
+          <h2 id="project_tagline">Use KaTex with AngularJS</h2>
 
-    <h1 id="project_title">angular-katex</h1>
-
-    <h2 id="project_tagline">Use KaTex with AngularJS</h2>
-
-    <section id="downloads">
-      <a class="zip_download_link" href="https://github.com/tfoxy/angular-katex/zipball/master">Download this project as
-        a .zip file</a>
-      <a class="tar_download_link" href="https://github.com/tfoxy/angular-katex/tarball/master">Download this project as
-        a tar.gz file</a>
-    </section>
-  </header>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="main_content_wrap" class="outer">
-  <section id="main_content" class="inner">
-    <h2>
-      <a id="requirements" class="anchor" href="#requirements" aria-hidden="true">
-        <span class="octicon octicon-link"></span>
-      </a>
-      Requirements
-    </h2>
-
-    <ul>
-      <li><a href="https://github.com/angular/angular.js">AngularJS</a></li>
-      <li><a href="https://github.com/Khan/KaTeX">KaTeX</a></li>
-    </ul>
-
-    <h2>
-      <a id="load-into-your-app" class="anchor" href="#load-into-your-app" aria-hidden="true"><span
-          class="octicon octicon-link"></span></a>
-      Load into your app
-    </h2>
-
-    <p>You can get it from <a href="http://bower.io/">Bower</a></p>
-
-    <div class="highlight highlight-sh">
-      <pre>bower install angular-katex</pre>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/tfoxy/angular-katex/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/tfoxy/angular-katex/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
     </div>
 
-    <p>Load the script files in your application:</p>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="angular-katex" class="anchor" href="#angular-katex" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>angular-katex</h1>
 
-    <div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span
-        class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span
-        class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular/angular.js<span
-        class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
-&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span
-          class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span
-          class="pl-s"><span class="pl-pds">"</span>bower_components/katex/dist/katex.min.js<span
-          class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
-&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span
-          class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span
-          class="pl-s"><span class="pl-pds">"</span>bower_components/angular-katex/angular-katex.js<span class="pl-pds">"</span></span>&gt;&lt;/<span
-          class="pl-ent">script</span>&gt;</pre>
+<p><a href="https://npmjs.org/package/angular-katex"><img src="http://img.shields.io/npm/v/angular-katex.svg" alt="npm version"></a> <img src="https://img.shields.io/bower/v/angular-katex.svg" alt="bower version"> <a href="https://travis-ci.org/tfoxy/angular-katex"><img src="https://img.shields.io/travis/tfoxy/angular-katex.svg" alt="build status"></a></p>
+
+<p>Display math with KaTex and AngularJS.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li><a href="https://github.com/angular/angular.js">AngularJS</a></li>
+<li><a href="https://github.com/Khan/KaTeX">KaTeX</a></li>
+</ul>
+
+<h2>
+<a id="load-into-your-app" class="anchor" href="#load-into-your-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Load into your app</h2>
+
+<p>You can get it from <a href="http://bower.io/">Bower</a></p>
+
+<div class="highlight highlight-source-shell"><pre>bower install angular-katex</pre></div>
+
+<p>or <a href="http://npmjs.com/">npm</a></p>
+
+<div class="highlight highlight-source-shell"><pre>npm install angular-katex</pre></div>
+
+<p>Load the script files in your application:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular/angular.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/katex/dist/katex.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular-katex/angular-katex.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>Add the specific module to your dependencies:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>katex<span class="pl-pds">'</span></span>, <span class="pl-k">...</span>])</pre></div>
+
+<h2>
+<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage examples</h2>
+
+<p><a href="http://jsbin.com/bidici/embed?html,output">Live demo</a></p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- Tag element --&gt;</span>
+&lt;<span class="pl-ent">katex</span>&gt;x^2&lt;/<span class="pl-ent">katex</span>&gt;
+
+<span class="pl-c">&lt;!-- Attribute --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>&gt;x^2&lt;/<span class="pl-ent">div</span>&gt;
+
+<span class="pl-c">&lt;!-- Attribute value --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span>=<span class="pl-s"><span class="pl-pds">"</span>x^2<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+
+<span class="pl-c">&lt;!-- expr attribute value --&gt;</span>
+&lt;<span class="pl-ent">katex</span> <span class="pl-e">expr</span>=<span class="pl-s"><span class="pl-pds">"</span>x^2<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">katex</span>&gt;
+
+<span class="pl-c">&lt;!-- Bind to scope</span>
+<span class="pl-c">  $scope.tex = {pow: 'x^2'}</span>
+<span class="pl-c">  --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex-bind</span>=<span class="pl-s"><span class="pl-pds">"</span>tex.pow<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+&lt;<span class="pl-ent">katex</span> <span class="pl-e">bind</span>=<span class="pl-s"><span class="pl-pds">"</span>tex.pow<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">katex</span>&gt;
+
+<span class="pl-c">&lt;!-- Set display mode --&gt;</span>
+&lt;<span class="pl-ent">katex</span> <span class="pl-e">expr</span>=<span class="pl-s"><span class="pl-pds">"</span>x^2<span class="pl-pds">"</span></span> <span class="pl-e">display-mode</span>&gt;&lt;/<span class="pl-ent">katex</span>&gt;
+
+<span class="pl-c">&lt;!-- Set error handler --&gt;</span>
+<span class="pl-c">&lt;!-- on-error locals:</span>
+<span class="pl-c">  $expr: (string) expression</span>
+<span class="pl-c">  $err: (object) error</span>
+<span class="pl-c">  $setText: (function) set element text</span>
+<span class="pl-c">  --&gt;</span>
+&lt;<span class="pl-ent">katex</span> <span class="pl-e">expr</span>=<span class="pl-s"><span class="pl-pds">"</span>\<span class="pl-pds">"</span></span> <span class="pl-e">on-error</span>=<span class="pl-s"><span class="pl-pds">"</span>$setText('Bad Expression: ' + $expr + ' . ' + $err)<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">katex</span>&gt;
+
+<span class="pl-c">&lt;!-- Use auto-render --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">katex</span> <span class="pl-e">auto-render</span>&gt;
+  &lt;<span class="pl-ent">p</span>&gt;The following formula is rendered&lt;/<span class="pl-ent">p</span>&gt;
+  $$x^2$$
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<p>To use the <a href="https://github.com/Khan/KaTeX/tree/master/contrib/auto-render">auto-render extension</a>,
+the file <code>auto-render.min.js</code> is needed.
+If you installed katex with bower, it is inside <code>bower_components/katex/dist/contrib</code>.</p>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p><code>katexConfigProvider</code> have the following properties:</p>
+
+<ul>
+<li>
+<code>defaultOptions</code>: object that is passed to the <code>katex.render</code> function as the options parameter.
+By default, it is <code>{}</code>.</li>
+<li>
+<code>errorHandler</code>: function that is called when there is an error while parsing the expression.
+It has three parameters: <code>error</code>, <code>expression</code>, <code>element</code>.
+It does not get called if <code>katexOnError</code> directive is used.
+By default, it appends a span element with the error message and the <code>katex-error</code> class: <code>&lt;span class="katex-error"&gt;Error: message&lt;/span&gt;</code>.
+This function can be used to use MathJax as a fallback.</li>
+</ul>
+      </section>
     </div>
 
-    <p>Add the specific module to your dependencies:</p>
-
-    <div class="highlight highlight-javascript">
-      <pre>angular.module(<span class="pl-s"><span class="pl-pds">'</span>myApp<span
-          class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>katex<span
-          class="pl-pds">'</span></span>, ...])</pre>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">angular-katex maintained by <a href="https://github.com/tfoxy">tfoxy</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
     </div>
 
-    <h2>
-      <a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true">
-        <span class="octicon octicon-link"></span>
-      </a>
-      Usage examples
-    </h2>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71902554-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
 
-    <iframe id="examples-iframe" src="http://jsbin.com/bidici/embed?output"></iframe>
 
-    <h2>
-      <a id="configuration" class="anchor" href="#configuration" aria-hidden="true">
-        <span class="octicon octicon-link"></span>
-      </a>
-      Configuration
-    </h2>
-
-    <p><code>katexConfigProvider</code> have the following properties:</p>
-
-    <ul>
-      <li>
-        <code>defaultOptions</code>: object that is passed to the <code>katex.render</code> function as the options parameter.
-        By default, it is <code>{}</code>.
-      </li>
-      <li>
-        <code>errorTemplate</code>: function that returns the html to use when there is an error parsing the expression.
-        It has one parameter: <code>error</code>.
-        By default, it returns a span element with the error message and the <code>katex-error</code> class: <code>&lt;span
-        class="katex-error"&gt;Error: message&lt;/span&gt;</code>
-      </li>
-      <li>
-        <code>errorHandler</code>: function that is called when there is an error while parsing the expression.
-        It has three parameters: <code>error</code>, <code>text</code>, <code>element</code>. <code>text</code> is the
-        math expression.
-        By default, it sets the html of the element by calling <code>errorTemplate</code>.
-        This function can be used to use MathJax as a fallback.
-      </li>
-    </ul>
-  </section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-  <footer class="inner">
-    <p class="copyright">angular-katex maintained by <a href="https://github.com/tfoxy">tfoxy</a></p>
-
-    <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-  </footer>
-</div>
-
-</body>
+  </body>
 </html>
