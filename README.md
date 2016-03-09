@@ -60,7 +60,6 @@ angular.module('myApp', ['katex', ...])
 <!-- Bind to scope
   $scope.tex = {pow: 'x^2'}
   -->
-<div katex-bind="tex.pow"></div>
 <katex bind="tex.pow"></katex>
 
 <!-- Set display mode -->

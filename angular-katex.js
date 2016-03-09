@@ -1,5 +1,5 @@
 /*!
- * angular-katex v0.9.0
+ * angular-katex v0.10.0
  * https://github.com/tfoxy/angular-katex
  *
  * Copyright 2015 Tomás Fox
@@ -14,6 +14,7 @@
       .constant('renderMathInElement', getRenderMathInElement())
       .provider('katexConfig', katexConfigProvider)
       .directive('katex', katexDirective)
+      // katexBind is deprecated
       .directive('katexBind', katexBindDirective);
 
 
@@ -148,6 +149,11 @@
   katexBindDirective.$inject = ['katexConfig'];
 
   function katexBindDirective(katexConfig) {
+    console.warn(
+      'katex-bind directive is deprecated. ' +
+      'Please use katex directive with bind attribute instead. ' +
+      'e.g.: <span katex bind="expr"></span>'
+    );
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
