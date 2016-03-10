@@ -29,7 +29,8 @@
     "karma-phantomjs-launcher": "~0.2.3",
     "mocha": "~2.4.5",
     "phantomjs": "~1.9.19",
-    "phantomjs-polyfill": "0.0.2"
+    "phantomjs-polyfill": "0.0.2",
+    "uglify-js": "~2.6.2"
   },
   "author": "Tomás Fox <tomas.c.fox@gmail.com>",
   "license": "MIT"
