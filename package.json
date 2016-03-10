@@ -21,14 +21,15 @@
     "tex"
   ],
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "phantomjs": "*",
-    "karma": "0.12.x",
-    "karma-mocha": "0.2.x",
-    "karma-chai": "0.1.x",
-    "karma-phantomjs-launcher": "0.2.x",
-    "karma-chrome-launcher": "0.2.x"
+    "chai": "~3.5.0",
+    "karma": "~0.13.22",
+    "karma-chai": "~0.1.0",
+    "karma-chrome-launcher": "~0.2.2",
+    "karma-mocha": "~0.2.2",
+    "karma-phantomjs-launcher": "~0.2.3",
+    "mocha": "~2.4.5",
+    "phantomjs": "~1.9.19",
+    "phantomjs-polyfill": "0.0.2"
   },
   "author": "Tomás Fox <tomas.c.fox@gmail.com>",
   "license": "MIT"
