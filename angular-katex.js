@@ -159,7 +159,11 @@
       link: function(scope, element, attrs) {
         scope.$watch(attrs.katexBind, function(expr) {
           if ('autoRender' in attrs || 'katexAutoRender' in attrs) {
-            element.text(expr);
+            if (hasHtmlModeOff(scope, attrs)) {
+              element.text(expr);
+            } else {
+              element.html(expr);
+            }
             katexConfig.autoRender(element, scope, attrs);
           } else {
             katexConfig.render(element, expr, scope, attrs);
